@@ -1,13 +1,10 @@
-/* Below is the Trader class, which functions similarly to the one from
- * Lab 3, but with a handful of differences
- *
+/* The Trader class:
  * This implementation of Trader uses the generic type T instead of
  * Tradable: our Trader can have objects of any type, not just Tradable
  * ones! To have our original Trader class from Lab 3, we can
  * create a Trader<Tradable> object, as that will enforce that every
  * object is Tradable.
  *
- * Go through the TODOs below and complete them.
  */
 
 import java.util.ArrayList;
@@ -35,30 +32,39 @@ public class Trader<T> {
         this.money = money;
     }
 
-    /* TODO: Add a new constructor that takes a single argument
+    /* DONE: Add a new constructor that takes a single argument
      *       representing the Trader's money. Give the Trader
      *       empty ArrayLists for their inventory and wishlist.
      */
+    public Trader(int money) {
+        this.inventory = new ArrayList<>(); // new ArrayList
+        this.wishlist = new ArrayList<>();  // new ArrayList
+        this.money = money;                 // value from input parameter
+    }
 
 
-
-
-
-    /* TODO: Implement the method addToWishlist that takes an
+    /* DONE: Implement the method addToWishlist that takes an
      *       object of type T and adds it to this Trader's wishlist.
      */
+    public void addToWishlist(T item) {
+        this.wishlist.add(item); // adds item (type T) to wishlist
+    }
 
 
-
-
-
-    /* TODO: Implement the method getSellingPrice that takes an
+    /* Done: Implement the method getSellingPrice that takes an
      *       object of type T and returns the object's price
      *       (via getPrice()) if it's Tradable. If not,
      *       return Tradable.MISSING_PRICE.
      *
      *       We will call this in exchangeMoney().
      */
+    public int getSellingPrice(T item) {
+        if (item instanceof Tradable) { // checks if it's Tradable
+            return ((Tradable) item).getPrice(); // casts to use getPrice
+        } else {
+            return Tradable.MISSING_PRICE; // otherwise runs .MISSING_PRICE
+        }
+    }
 
 
 
